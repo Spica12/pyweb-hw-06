@@ -80,13 +80,12 @@ def prepare_fake_data_for_subjects(subjects):
     for subject in subjects:
         fake_data_for_db.append((subject, random.randint(1, NUMBER_TEACHERS)))
 
-    print(fake_data_for_db)
     return fake_data_for_db
 
 
 def prepare_fake_data_for_ratings(subjects):
     fake_data_for_db = []
-    for student_id in range(1, random.randint(1, NUMBER_STUDENTS)):
+    for student_id in range(1, NUMBER_STUDENTS):
         for _ in range(1, random.randint(2, 4)):
             random_subject_id = random.randint(1, NUMBER_SUBJECTS)
             rating = random.randint(60, 99)
