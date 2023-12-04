@@ -7,7 +7,6 @@ def create_tables():
     perform_querry(sql_create_tables)
 
 
-
 if __name__ == "__main__":
     # Create tables
     create_tables()

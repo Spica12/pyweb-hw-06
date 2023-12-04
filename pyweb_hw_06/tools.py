@@ -1,7 +1,13 @@
-import psycopg2
 from contextlib import contextmanager
 from pathlib import Path
 
+import psycopg2
+
+HOST = "localhost"
+PORT = "5432"
+DATABASE = "pyhomedb"
+USER = "postgres"
+PASSWORD = "pass"
 
 BASE_DIR_SQL = Path("../sql_querry")
 
@@ -12,11 +18,11 @@ def create_connection():
     conn = None
     try:
         conn = psycopg2.connect(
-            host="localhost",
-            port="5432",
-            database="pyhomedb",
-            user="postgres",
-            password="pass",
+            host=HOST,
+            port=PORT,
+            database=DATABASE,
+            user=USER,
+            password=PASSWORD,
         )
         yield conn
         conn.commit()
@@ -71,7 +77,7 @@ def perform_querry_from_file(head, sql_file):
     sql_querry = read_scripst_from_file(sql_file)
     raw_result = perform_querry(sql_querry, is_result=True)
 
-    result = head + '\n'
+    result = head + "\n"
     for i, student in enumerate(raw_result, start=1):
         result += f"{i}. {student}\n"
 

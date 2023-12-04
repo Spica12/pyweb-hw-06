@@ -1,10 +1,9 @@
-from datetime import datetime
-from faker import Faker
 import random
+from datetime import datetime
+
+from faker import Faker
 
 from tools import perform_insert, read_scripst_from_file
-
-
 
 NUMBER_STUDENTS = 50
 NUMBER_GROUPS = 3
