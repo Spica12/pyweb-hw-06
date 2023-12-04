@@ -1,7 +1,9 @@
 from datetime import datetime
 from faker import Faker
-from pprint import pprint
 import random
+
+from tools import perform_insert, read_scripst_from_file
+
 
 
 NUMBER_STUDENTS = 50
@@ -45,11 +47,6 @@ def generate_fake_data():
             f"{random_first_letter}0{randdom_number_for_group}{random_second_letter}"
         )
         fake_groups.append(fake_group)
-
-    # print(fake_students)
-    # print(fake_groups)
-    # print(fake_teachers)
-    # print(fake_subjects)
 
     return fake_students, fake_groups, fake_teachers, fake_subjects
 
@@ -103,24 +100,37 @@ def prepare_fake_data_for_ratings(subjects):
     return fake_data_for_db
 
 
-# def prepare_fake_data():
-#     students, groups, teachers, subjects = generate_fake_data()
+def insert_fake_data_to_database():
+    """Insert fake data to database"""
+    students, groups, teachers, subjects = generate_fake_data()
 
-#     data_for_students = prepare_fake_data_for_students(students)
-#     data_for_groups = prepare_fake_data_for_groups(groups)
-#     data_for_students = prepare_fake_data_for_teachers(teachers)
-#     data_for_subjects = prepare_fake_data_for_subjects(subjects, teachers)
-#     data_for_ratings = prepare_fake_data_for_ratings(students, subjects)
+    data_for_students = prepare_fake_data_for_students(students)
+    data_for_groups = prepare_fake_data_for_groups(groups)
+    data_for_teachers = prepare_fake_data_for_teachers(teachers)
+    data_for_subjects = prepare_fake_data_for_subjects(subjects)
+    data_for_ratings = prepare_fake_data_for_ratings(subjects)
 
-#     return (
-#         data_for_students,
-#         data_for_groups,
-#         data_for_students,
-#         data_for_subjects,
-#         data_for_ratings,
-#     )
+    # Insert data to table groups
+    sql_base_insert_to_groups = read_scripst_from_file("../sql_querry/insert_values_groups.sql")
+    perform_insert(sql_base_insert_to_groups, data_for_groups)
+
+
+    # Insert data to table students
+    sql_base_insert_to_students = read_scripst_from_file("../sql_querry/insert_values_students.sql")
+    perform_insert(sql_base_insert_to_students, data_for_students)
+
+    # Insert data to table teachers
+    sql_base_insert_to_teachers = read_scripst_from_file("../sql_querry/insert_values_teachers.sql")
+    perform_insert(sql_base_insert_to_teachers, data_for_teachers)
+
+    # Insert data to table subjects
+    sql_base_insert_to_subjects = read_scripst_from_file("../sql_querry/insert_values_subjects.sql")
+    perform_insert(sql_base_insert_to_subjects, data_for_subjects)
+
+    # Insert data to table subjects
+    sql_base_insert_to_ratings = read_scripst_from_file("../sql_querry/insert_values_ratings.sql")
+    perform_insert(sql_base_insert_to_ratings, data_for_ratings)
 
 
 if __name__ == "__main__":
-    students, groups, teachers, subjects = generate_fake_data()
-    pprint(prepare_fake_data_for_ratings())
+    insert_fake_data_to_database()
