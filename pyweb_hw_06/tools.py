@@ -67,6 +67,7 @@ def read_scripst_from_file(file):
 
 
 def perform_querry_from_file(head, sql_file):
+    """Perform SQL querry from file"""
     sql_querry = read_scripst_from_file(sql_file)
     raw_result = perform_querry(sql_querry, is_result=True)
 

@@ -25,7 +25,6 @@ SUBJECTS = [
     "Geography",
 ]
 
-
 fake = Faker("uk")
 
 
@@ -111,24 +110,23 @@ def insert_fake_data_to_database():
     data_for_ratings = prepare_fake_data_for_ratings(subjects)
 
     # Insert data to table groups
-    sql_base_insert_to_groups = read_scripst_from_file("../sql_querry/insert_values_groups.sql")
+    sql_base_insert_to_groups = read_scripst_from_file("insert_values_groups.sql")
     perform_insert(sql_base_insert_to_groups, data_for_groups)
 
-
     # Insert data to table students
-    sql_base_insert_to_students = read_scripst_from_file("../sql_querry/insert_values_students.sql")
+    sql_base_insert_to_students = read_scripst_from_file("insert_values_students.sql")
     perform_insert(sql_base_insert_to_students, data_for_students)
 
     # Insert data to table teachers
-    sql_base_insert_to_teachers = read_scripst_from_file("../sql_querry/insert_values_teachers.sql")
+    sql_base_insert_to_teachers = read_scripst_from_file("insert_values_teachers.sql")
     perform_insert(sql_base_insert_to_teachers, data_for_teachers)
 
     # Insert data to table subjects
-    sql_base_insert_to_subjects = read_scripst_from_file("../sql_querry/insert_values_subjects.sql")
+    sql_base_insert_to_subjects = read_scripst_from_file("insert_values_subjects.sql")
     perform_insert(sql_base_insert_to_subjects, data_for_subjects)
 
-    # Insert data to table subjects
-    sql_base_insert_to_ratings = read_scripst_from_file("../sql_querry/insert_values_ratings.sql")
+    # Insert data to table ratings
+    sql_base_insert_to_ratings = read_scripst_from_file("insert_values_ratings.sql")
     perform_insert(sql_base_insert_to_ratings, data_for_ratings)
 
 
