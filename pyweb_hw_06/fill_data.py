@@ -33,7 +33,7 @@ def generate_fake_data():
     """Generate fake data for testing db"""
     fake_students = [fake.name() for _ in range(NUMBER_STUDENTS)]
     fake_groups = []
-    fake_subjects = [random.choice(SUBJECTS) for _ in range(NUMBER_SUBJECTS)]
+    fake_subjects = random.sample(SUBJECTS, k=NUMBER_SUBJECTS)
     fake_teachers = [fake.name() for _ in range(NUMBER_TEACHERS)]
 
     first_letters_for_group = ["M", "E", "C", "D", "B"]
@@ -80,6 +80,7 @@ def prepare_fake_data_for_subjects(subjects):
     for subject in subjects:
         fake_data_for_db.append((subject, random.randint(1, NUMBER_TEACHERS)))
 
+    print(fake_data_for_db)
     return fake_data_for_db
 
 
