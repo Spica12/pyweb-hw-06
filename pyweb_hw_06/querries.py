@@ -1,5 +1,4 @@
 from tools import perform_querry, read_scripst_from_file
-from pprint import pprint
 
 def perform_sql_querry(head, sql_file):
     sql_querry = read_scripst_from_file(sql_file)
