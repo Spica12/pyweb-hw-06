@@ -1,5 +1,9 @@
 import psycopg2
 from contextlib import contextmanager
+from pathlib import Path
+
+
+BASE_DIR_SQL = Path("../sql_querry")
 
 
 @contextmanager
@@ -22,7 +26,8 @@ def create_connection():
         conn.rollback()
 
     finally:
-        conn.close()
+        if conn is not None:
+            conn.close()
 
 
 def perform_querry(querry, is_result=False):
@@ -55,7 +60,18 @@ def perform_insert(insert: str, values: list[tuple]):
 
 def read_scripst_from_file(file):
     """Read the script from file"""
-    with open(file, "r") as file:
+    with open(BASE_DIR_SQL / file, "r") as file:
         sql = file.read()
 
     return sql
+
+
+def perform_querry_from_file(head, sql_file):
+    sql_querry = read_scripst_from_file(sql_file)
+    raw_result = perform_querry(sql_querry, is_result=True)
+
+    result = head + '\n'
+    for i, student in enumerate(raw_result, start=1):
+        result += f"{i}. {student}\n"
+
+    print(result)
