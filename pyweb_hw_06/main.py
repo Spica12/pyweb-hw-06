@@ -97,7 +97,6 @@ def insert_fake_data_to_database():
 
     # Insert data to table subjects
     sql_base_insert_to_ratings = read_scripst_from_file("../sql_querry/insert_values_ratings.sql")
-    print(data_for_ratings)
     perform_insert(sql_base_insert_to_ratings, data_for_ratings)
 
 
